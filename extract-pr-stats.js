@@ -1,76 +1,3 @@
-/**
- * TODO
- *
- * distinguish between prsReview and prsReviewedWithComment
- * state: approved, changes requests, just comment
- */
-
-/**
- * Usage: node extract-pr-stats.js path/to/input.json
- *
- * This script extracts the following statistics from a .json file that contains the output of [this query](https://gist.github.com/sjyoung12/cad9c3987699692ceb70fc5ab10b2d8b):
- * - Total number of PRs reviewed
- * - Comments/PR
- * - Words/comment
- *
- * It exports results to a .csv file
- *
- */
-
-/*
-GraphQL query to use at https://docs.github.com/en/graphql/overview/explorer.
-
-{
-  search(
-    type: ISSUE,
-    query: "repo:NerdWallet/front-page is:pr created:<2022-12-31",
-    first: 100
-  ) {
-    pageInfo {
-      startCursor
-      hasNextPage
-      endCursor
-    }
-    edges {
-      node {
-        ... on PullRequest {
-          author {
-            login
-          }
-          repository {
-            name
-          }
-          title
-          number
-          createdAt
-          totalCommentsCount
-          comments(first: 100, orderBy: {field: UPDATED_AT, direction: DESC}) {
-            nodes {
-              author {
-                login
-              }
-              body
-            }
-          }
-          reviews(first: 45) {
-            nodes {
-              author {login}
-              comments(first: 100) {
-                nodes {
-                  author {login}
-                  body
-                }
-              }
-              state
-            }
-          }
-        }
-      }
-    }
-  }
-}
-*/
-
 // Config
 const USERS_TO_ANALYZE = [];
 
@@ -105,14 +32,6 @@ fs.readdir(dataDir, (err, files) => {
           };
       }
   };
-
-  /*
-  What to log:
-  - PRs authored
-  - PRs reviewed
-      - Reviews -> comment
-      - Comments -> comment
-   */
 
   const logComment = (reviewer, comment, prNumber) => {
     initializeReviewer(reviewer);
