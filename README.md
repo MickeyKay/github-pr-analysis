@@ -3,7 +3,7 @@ Minimal script/instructions to get PR/review info via the GitHub GraphQL API
 
 
 ### Instructions
-1. Run the following query in [GitHub's GraphQL Explorer](https://docs.github.com/en/graphql/overview/explorer). Update `query` as needed to configure the target repo and created date.
+1. Run the following query in [GitHub's GraphQL Explorer](https://docs.github.com/en/graphql/overview/explorer). Update `query` as needed to configure the target repo and PR creation date filtering.
 	```
 	{
 	  search(
