@@ -62,3 +62,9 @@ Minimal script/instructions to get PR/review info via the GitHub GraphQL API
 This will generate two artifacts:
 1. `analysis.csv` - A comma-separated export that can be imported into a spreadsheet tool for further analysis.
 1. `pr-data.json` - A consolidated aggregation of all PR data from the various `/data/*` files in one easy-to-parse object.
+
+### Configuration options
+The following variables can be configured in `extract-pr-stats.js`:
+| Variable | Description |
+| -------- | ----------- |
+| `USERS_TO_ANALYZE` | GitHub users to include in the analysis (other users will be omitted). Will include all users if left empty. |
