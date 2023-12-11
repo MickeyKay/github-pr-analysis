@@ -15,6 +15,12 @@ let pullRequests = [];
 
 fs.readdir(dataDir, (err, files) => {
   files.forEach(file => {
+
+    // Skip system/non-JSON files.
+    if (file.indexOf('.json') == -1) {
+      return;
+    }
+
     let data = require(`${process.cwd()}/${dataDir}/${file}`);
     pullRequests = [...pullRequests, ...data.data.search.edges];
   });
